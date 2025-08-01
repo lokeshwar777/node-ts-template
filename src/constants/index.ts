@@ -19,3 +19,5 @@ export { __dirname, PORT, isProd, LOG_LEVEL, sessionSecret };
 export { ERRORS } from "./error.constants.js";
 export { RESPONSES } from "./response.constants.js";
 export { DATABASE_URI, DATABASE_NAME } from "./db.constants.js";
+
+// use this to generate any strong secret - node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))" and store the secret in .env

@@ -7,6 +7,8 @@ import { jsonErrorResponder } from "./middlewares/jsonErrorResponder.js";
 import { isProd, PORT } from "./constants/index.js";
 import { logger } from "./logger/index.js";
 import type { Server } from "node:http";
+import session from "express-session";
+import { sessionConfig } from "./config/index.js";
 import { httpLogger } from "./middlewares/logger.middleware.js";
 // import methodOverride from "method-override"; // use if needed
 
@@ -31,6 +33,13 @@ app.use(express.urlencoded({ extended: true })); // nested object compatibility
 
 //  Serve static assets
 app.use(express.static("public"));
+
+// proxy config
+if (isProd) {
+	app.set("trust proxy", 1);
+} // trust first proxy - Nginx, Heroku
+// express session middleware (before routes)
+app.use(session(sessionConfig));
 
 // API Routes
 app.use("/api/v1", APIRouter);
