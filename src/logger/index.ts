@@ -1,4 +1,4 @@
-import { pino } from "pino";
+import pino from "pino";
 import { loggerTransport } from "./logger.transport.js";
 import { loggerConfig } from "./logger.config.js";
 

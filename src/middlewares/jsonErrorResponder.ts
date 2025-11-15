@@ -26,7 +26,7 @@ export const jsonErrorResponder: ErrorRequestHandler = (
 			? err
 			: new APIError("something went wrong on client!");
 
-	logger.error("client-side error", apiError); // helpful for debugging
+	logger.error(`client-side error: ${apiError.message}`); // helpful for debugging
 
 	res.status(apiError.statusCode).json(apiError.toJSON());
 };

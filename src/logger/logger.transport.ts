@@ -1,6 +1,6 @@
 import path from "path";
 import type { DestinationStream, TransportTargetOptions } from "pino";
-import { pino } from "pino";
+import pino from "pino";
 import { isProd, LOG_LEVEL } from "../constants/index.js";
 
 const __dirname = import.meta.dirname;

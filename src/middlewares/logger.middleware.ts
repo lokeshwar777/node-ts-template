@@ -1,6 +1,5 @@
 import { pinoHttp } from "pino-http";
 import { logger } from "../logger/index.js";
-import pino, { P } from "pino";
 import { randomUUID } from "node:crypto";
 import type { Request, Response } from "express";
 
@@ -32,13 +31,8 @@ const httpLogger = pinoHttp({
 	// replace loggableObject {res, responseTime} after success
 	// customSuccessObject: (req, res, loggableObject) => ({}), // empty object ({})
 
-	customErrorMessage: (
-		req: Request,
-		res: Response,
-		err: Error | undefined,
-		responseTime: number,
-	) =>
-		`${req.method} ${req.originalUrl} - ${res.statusCode} -> ${responseTime}ms`,
+	customErrorMessage: (req: Request, res: Response, err: Error | undefined) =>
+		`${req.method} ${req.originalUrl} - ${res.statusCode} -X-> ${err?.message}`,
 
 	// replace customErrorObject {error} after success
 	// customErrorObject: (req, res, loggableObject) => ({}),
