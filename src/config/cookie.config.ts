@@ -1,7 +1,7 @@
-import type session from "express-session";
+import type { CookieOptions } from "express-session";
 import { isProd } from "../constants/index.js";
 
-const cookieOptions: session.CookieOptions = {
+const cookieOptions: CookieOptions = {
 	httpOnly: true,
 	secure: isProd,
 	path: "/",

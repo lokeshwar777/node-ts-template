@@ -6,8 +6,9 @@ import type {
 } from "express";
 import APIError from "../utils/APIError.js";
 import { ERRORS } from "../constants/index.js";
+import { logger } from "../logger/index.js";
 
-export const globalErrorHandler: ErrorRequestHandler = (
+const globalErrorHandler: ErrorRequestHandler = (
 	err: unknown,
 	req: Request,
 	res: Response,
@@ -23,3 +24,18 @@ export const globalErrorHandler: ErrorRequestHandler = (
 
 	res.status(error.statusCode).json(error.toJSON());
 };
+
+const connectionErrorHandler = (
+	err: AggregateError | Error,
+	context: string,
+): void => {
+	if (err instanceof AggregateError) {
+		for (const subErr of err.errors) {
+			logger.error(`AggregateError in ${context} \n${subErr.stack}`);
+		}
+	} else {
+		logger.error(`Error in ${context} \n${err.stack}`);
+	}
+};
+
+export { globalErrorHandler, connectionErrorHandler };

@@ -1,12 +1,14 @@
 import type { SessionOptions } from "express-session";
 import { isProd, sessionSecret } from "../constants/index.js";
 import { randomUUID } from "node:crypto";
-import { cookieOptions } from "./index.js";
+import { cookieOptions } from "./cookie.config.js";
+import { redisStore } from "./redis.config.js";
 
 const sessionConfig: SessionOptions = {
 	secret: sessionSecret,
 	name: isProd ? "__Host-sid" : "sid777", // display name of the cookie
 	genid: () => randomUUID(), // session id generation
+	store: redisStore,
 	cookie: cookieOptions,
 	unset: "destroy",
 	resave: false,

@@ -8,7 +8,7 @@
 		"dev:watch": "tsx watch --env-file=.env src/server.ts",
 		"dev:debug": "tsx watch --inspect --env-file=.env src/server.ts",
 		"build": "tsc",
-		"start": "node dist/server.js",
+		"start": "node --env-file=.env dist/server.js",
 		"format": "prettier --write .",
 		"lint": "eslint src --ext .ts",
 		"lint:fix": "eslint src --ext .ts --fix",
@@ -48,11 +48,13 @@
 		"typescript-eslint": "^8.34.0"
 	},
 	"dependencies": {
+		"connect-redis": "^9.0.0",
 		"express": "^5.1.0",
 		"express-session": "^1.18.2",
 		"mongoose": "^8.15.2",
 		"pino": "^10.1.0",
 		"pino-http": "^11.0.0",
+		"redis": "^5.7.0",
 		"zod": "^4.0.10"
 	}
 }

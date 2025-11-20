@@ -1,0 +1,19 @@
+services:
+    backend:
+        build: .
+        ports:
+            - "3000:3000"
+        depends_on:
+            - redis
+
+    redis:
+        image: redis:8.0.3-alpine
+        ports:
+            - "6379:6379"
+        volumes:
+            - redis-data:/data
+            - ./redis.conf:/usr/local/etc/redis/redis.conf
+        command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+
+volumes:
+    redis-data:

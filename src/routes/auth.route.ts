@@ -17,10 +17,6 @@ router.post(
 	authHandlers.loginHandler,
 );
 
-router.post(
-	"/logout",
-	zodValidator(AuthSchema.loginSchema),
-	authHandlers.logoutHandler,
-);
+router.post("/logout", authHandlers.logoutHandler);
 
 export default router;

@@ -1,10 +1,19 @@
+import type { ISessionUser } from "../types/auth.interface.js";
 import type { IUser } from "../types/user.interface.js";
 
-const getUserProfile = async (userId: string): Promise<IUser> => {
+// return IUser instead of ISessionUser after DB integration
+const getUserProfile = async (user: ISessionUser): Promise<ISessionUser> => {
 	// 1. check whether the user exists or not using id
 	// 2. fetch user profile data from DB/API/cookies with id
 	// 2. sent the data as response
-	const userData: IUser = await { id: "777" }; // sample
+
+	// mock DB data retrieval using user session data
+	const { id, username, role } = await user;
+	const userData: ISessionUser = {
+		id,
+		username,
+		role,
+	};
 	return userData;
 };
 

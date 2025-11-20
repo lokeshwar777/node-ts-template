@@ -1,9 +1,9 @@
 import { Request } from "express";
-import type { IUser } from "../user.interface.ts";
+import type { ISessionUser } from "../auth.interface.ts";
 declare global {
 	namespace Express {
 		interface Request {
-			user?: IUser; // ensure req.user is always avaiable/undefined
+			user?: ISessionUser; // ensure req.user is always avaiable/undefined
 		}
 	}
 }
